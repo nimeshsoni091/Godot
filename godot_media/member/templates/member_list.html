@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Partner Name: {{ partner_name }}</h3><br/>
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Member Name</td>
+            <td>Member Phone</td>
+            <td>Member Email</td>
+            <td>
+                <a href="{% url 'member:member_insert' partner_id %}" class="btn btn-outline-success">
+                    <i class="fas fa-user-plus"></i> Add New Member
+                </a>
+            <td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in member_list %}
+            <tr>
+                <td>{{member.name}}</td>
+                <td>{{member.email}}</td>
+                <td>{{member.phone}}</td>
+                <td>
+                    <a href="{% url 'member:member_update' partner_id member.id %}" class="btn text-secondary px-0" data-toggle="tooltip" title="Edit Member Details">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'member:member_delete' member.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="col-md-4 float-right">
+    <a href="{% url 'partner_list' %}" class="btn btn-secondary btn-block btn-lg">
+        <i class="fas fa-stream"></i> Back to partner list
+    </a>
+</div>
+{% endblock content %}

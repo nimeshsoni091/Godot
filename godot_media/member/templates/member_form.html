@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h3>Partner Name: {{ partner_name }}</h3>
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{form|crispy}}
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success"><i class="fas fa-user-plus"></i>
+                {% if operation == 'insert' %}
+                Add New Member
+                {% else %}
+                Update Member Details
+                {% endif %}</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'partner_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to partner list
+            </a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

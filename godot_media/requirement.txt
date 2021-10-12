@@ -1,0 +1,4 @@
+Django
+psycopg2_binary
+django_crispy_forms
+djangorestframework
